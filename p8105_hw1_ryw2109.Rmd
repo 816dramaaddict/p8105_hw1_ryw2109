@@ -5,14 +5,15 @@ date: "2024-09-22"
 output: html_document
 ---
 
-```{r HW1Q1}
+```{r HW1Q1, message = FALSE}
 library(palmerpenguins)
 
 data("penguins", package = "palmerpenguins")
 
   # the data in this dataset, including names / values of important variables
-    # provides the variable names and the first 10 rows of the dataset
+    # provides the variable names and 
 names(penguins)
+    # the first 10 rows of the dataset
 unique(penguins)
 
   # the number of rows in the dataset
@@ -29,9 +30,15 @@ library(tidyverse)
   # Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 
-  # Export your first scatterplot o your project directory using ggsave.
+  # Export your first scatterplot in your project directory using ggsave.
 ggsave ("Bill Length VS Flipper Length.pdf")
 ```
+
+There is a total of `r nrow(penguins)` rows and `r ncol(penguins)` columns where there exists null values such as NA. The following are the variable names of the dataset:
+
+`r names(penguins)`
+
+There is an average flipper length of `r mean(penguins$flipper_length_mm, na.rm = TRUE)` mm.
 
 ## R Markdown
 
