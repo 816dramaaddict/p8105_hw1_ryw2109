@@ -5,8 +5,24 @@ date: "2024-09-22"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r HW1}
+library(palmerpenguins)
+
+data("penguins", package = "palmerpenguins")
+
+  # the data in this dataset, including names / values of important variables
+    # provides the variable names and the first 10 rows of the dataset
+names(penguins)
+unique(penguins)
+
+  # the number of rows in the dataset
+nrow(penguins)
+
+  # the number of columns in the dataset
+ncol(penguins)
+
+  # the mean flipper length with the removal of null values
+mean(penguins$flipper_length_mm, na.rm = TRUE)
 ```
 
 ## R Markdown
