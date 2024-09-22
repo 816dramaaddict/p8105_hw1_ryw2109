@@ -2,7 +2,7 @@
 title: "p8105_hw1_ryw2109"
 author: "Rita Wang"
 date: "2024-09-21"
-output: html_document
+output: github_document
 ---
 
 ### Question 1
