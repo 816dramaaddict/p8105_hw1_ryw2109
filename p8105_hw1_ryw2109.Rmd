@@ -4,10 +4,12 @@ author: "Rita Wang"
 date: "2024-09-22"
 output: html_document
 ---
-
-```{r HW1Q1, message = FALSE}
+```{r librarys_used}
 library(palmerpenguins)
+library(tidyverse)
+```
 
+```{r HW1Q1_part1, eval = FALSE}
 data("penguins", package = "palmerpenguins")
 
   # the data in this dataset, including names / values of important variables
@@ -24,14 +26,6 @@ ncol(penguins)
 
   # the mean flipper length with the removal of null values
 mean(penguins$flipper_length_mm, na.rm = TRUE)
-
-library(tidyverse)
-
-  # Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
-ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
-
-  # Export your first scatterplot in your project directory using ggsave.
-ggsave ("Bill Length VS Flipper Length.pdf")
 ```
 
 There is a total of `r nrow(penguins)` rows and `r ncol(penguins)` columns where there exists null values such as NA. The following are the variable names of the dataset:
@@ -40,8 +34,54 @@ There is a total of `r nrow(penguins)` rows and `r ncol(penguins)` columns where
 
 There is an average flipper length of `r mean(penguins$flipper_length_mm, na.rm = TRUE)` mm.
 
-## R Markdown
+```{r HW1Q1_part2}
+  # Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+  # Export your first scatterplot in your project directory using ggsave.
+ggsave ("Bill Length VS Flipper Length.pdf")
+```
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r HW1Q2_part1}
+hw_df = tibble(
+    # a random sample of size 10 from a standard Normal distribution
+  random_sample = rnorm(10),
+  
+    # a logical vector indicating whether elements of the sample are greater than 0
+  logical_vector = random_sample > 0,
+  
+    # a character vector of length 10
+  character_vector = c("Hello", "this", "is", "probably", "a", "charcter", "vector", "of", "length", "10"),
+  
+    # a factor vector of length 10, with 3 different factor “levels”
+  factor_vector = factor(c("Rainy", "Sunny", "Cloudy", "Rainy", "Rainy", "Sunny", "Sunny", "Cloudy", "Cloudy", "Sunny"))
+)
+
+hw_df
+
+  # Mean of each variable in the dataframe
+random_sample_mean <- hw_df %>% pull(random_sample) %>% mean(na.rm = TRUE)
+  random_sample_mean
+logical_vector_mean <- hw_df %>% pull(logical_vector) %>% mean(na.rm = TRUE)
+  logical_vector_mean
+character_vector_mean <- hw_df %>% pull(character_vector) %>% mean(na.rm = TRUE)
+  character_vector_mean
+factor_vector_mean <- hw_df %>% pull(factor_vector) %>% mean(na.rm = TRUE)
+  factor_vector_mean
+```
+
+The mean of the random sample of size 10 from a standard normal distribution is `r random_sample_mean` where this value indicates the average value of the following 10 random numeric values:
+
+`r random_sample`
+
+The mean of the logical vector indicating whether elements of the sample are greater than 0 is `r logical_vector_mean`. This value does not have any meaning as it is only the mean of the False (0) and True (1) contained in this vectors.
+
+The mean of the character vector of length 10 is `r character_vector_mean`. There is no mean computed as the character vector does not contain integers.
+
+The mean of the factor vector of length 10, with 3 different factor “levels” `r factor_vector_mean`. There is no mean computed as the factor vector does not contain integers as well.
+
+```{r HW1Q2_part2}
+
+```
+
