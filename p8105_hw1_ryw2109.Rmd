@@ -4,7 +4,7 @@ author: "Rita Wang"
 date: "2024-09-22"
 output: html_document
 ---
-```{r librarys_used}
+```{r librarys_used, echo = FALSE, message = FALSE}
 library(palmerpenguins)
 library(tidyverse)
 ```
@@ -34,7 +34,7 @@ There is a total of `r nrow(penguins)` rows and `r ncol(penguins)` columns where
 
 There is an average flipper length of `r mean(penguins$flipper_length_mm, na.rm = TRUE)` mm.
 
-```{r HW1Q1_part2}
+```{r HW1Q1_part2, message = FALSE, warning = FALSE}
   # Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 
@@ -43,7 +43,7 @@ ggsave ("Bill Length VS Flipper Length.pdf")
 ```
 
 
-```{r HW1Q2_part1}
+```{r HW1Q2_part1, message = FALSE}
 hw_df = tibble(
     # a random sample of size 10 from a standard Normal distribution
   random_sample = rnorm(10),
@@ -59,29 +59,38 @@ hw_df = tibble(
 )
 
 hw_df
+```
 
+```{r HW1Q2_part2, message = FALSE, warning = FALSE}
   # Mean of each variable in the dataframe
 random_sample_mean <- hw_df %>% pull(random_sample) %>% mean(na.rm = TRUE)
-  random_sample_mean
+  random_sample_mean_official = random_sample_mean
 logical_vector_mean <- hw_df %>% pull(logical_vector) %>% mean(na.rm = TRUE)
-  logical_vector_mean
+  logical_vector_mean_official = logical_vector_mean
 character_vector_mean <- hw_df %>% pull(character_vector) %>% mean(na.rm = TRUE)
-  character_vector_mean
+  character_vector_mean_official = character_vector_mean
 factor_vector_mean <- hw_df %>% pull(factor_vector) %>% mean(na.rm = TRUE)
-  factor_vector_mean
+  factor_vector_mean_official = factor_vector_mean
 ```
 
-The mean of the random sample of size 10 from a standard normal distribution is `r random_sample_mean` where this value indicates the average value of the following 10 random numeric values:
 
-`r random_sample`
+The mean of the random sample of size 10 from a standard normal distribution is `r random_sample_mean_official` where this value indicates the average value of 10 random numeric values.
 
-The mean of the logical vector indicating whether elements of the sample are greater than 0 is `r logical_vector_mean`. This value does not have any meaning as it is only the mean of the False (0) and True (1) contained in this vectors.
+The mean of the logical vector indicating whether elements of the sample are greater than 0 is `r logical_vector_mean_official`. This value does not have any meaning as it is only the mean of the False (0) and True (1) contained in this vectors.
 
-The mean of the character vector of length 10 is `r character_vector_mean`. There is no mean computed as the character vector does not contain integers.
+The mean of the character vector of length 10 is `r character_vector_mean_official`. There is no mean computed as the character vector does not contain integers.
 
-The mean of the factor vector of length 10, with 3 different factor “levels” `r factor_vector_mean`. There is no mean computed as the factor vector does not contain integers as well.
+The mean of the factor vector of length 10, with 3 different factor “levels” `r factor_vector_mean_official`. There is no mean computed as the factor vector does not contain integers as well.
 
-```{r HW1Q2_part2}
-
+```{r HW1Q2_part3, message = FALSE, warning = FALSE}
+  # explicitly convert variables from one type to another
+logical_vector_numeric = as.numeric(hw_df %>% pull(character_vector))
+  logical_vector_numeric = mean(logical_vector_numeric, na.rm = TRUE)
+character_vector_numeric = as.numeric(hw_df %>% pull(character_vector))
+  character_vector_numeric = mean(character_vector_numeric, na.rm = TRUE)
+factor_vector_numeric = as.numeric(hw_df %>% pull(factor_vector))
+  factor_vector_numeric = mean(factor_vector_numeric, na.rm = TRUE)
 ```
 
+
+When the logical, character and factor vectors where converted into numeric values, the computed mean is `r logical_vector_numeric`, `r character_vector_numeric`, `r factor_vector_numeric` respectively. There is now a value to these vectors, which helps to explain what happened previously when the mean was computed without converting the variable type.
