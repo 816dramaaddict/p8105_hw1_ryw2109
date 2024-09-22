@@ -5,7 +5,7 @@ date: "2024-09-22"
 output: html_document
 ---
 
-```{r HW1}
+```{r HW1Q1}
 library(palmerpenguins)
 
 data("penguins", package = "palmerpenguins")
@@ -23,6 +23,14 @@ ncol(penguins)
 
   # the mean flipper length with the removal of null values
 mean(penguins$flipper_length_mm, na.rm = TRUE)
+
+library(tidyverse)
+
+  # Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+
+  # Export your first scatterplot o your project directory using ggsave.
+ggsave ("Bill Length VS Flipper Length.pdf")
 ```
 
 ## R Markdown
